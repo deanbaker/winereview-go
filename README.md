@@ -54,3 +54,15 @@ I would look at the https://golang.org/pkg/net/http/ package for inspiration.
 
 Your swagger editor should now be able to make calls into your local machine. Note how we have had to set appropriate headers on each HandleFunc function to cater for this. Is there a better way? 
 
+Inspiration for the package layout was taken from this [Meduim](https://medium.com/@benbjohnson/standard-package-layout-7cdbc8391fc1) article, I saw it referenced in this rather entertaining talk on [YouTube](https://www.youtube.com/watch?v=MzTcsI6tn-0). Have a look if you get a chance and see where I was coming from.
+
+## Step 3
+
+Now we have a functioning RESTful API, it would be great to use something other than an in memory datastore to get things going.
+Notice that in Step 2 we had abstracted out some interfaces to deal with working with the Review struct?
+
+### The Challenge
+
+Implement these functions to store data into a database. By reusing the existing interfaces this task should require quite a small touch
+
+
