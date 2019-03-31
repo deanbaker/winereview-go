@@ -65,4 +65,9 @@ Notice that in Step 2 we had abstracted out some interfaces to deal with working
 
 Implement these functions to store data into a database. By reusing the existing interfaces this task should require quite a small touch
 
+### Notes
+For my implementation I have gone with sqlite for simplicity - you can use brew to install it and the code should 'just work'
+
+I have not used any fancy switching to select either memory or sqlite as a datasource, I have just used a different implementation in the root main.go file.
+
 

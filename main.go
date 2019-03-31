@@ -23,7 +23,9 @@ func main() {
 		log.Fatal("Could not read file")
 	}
 
-	reviewer := db.NewMemStore()
+	// Swapping out the Reviewer Interface
+	reviewer := db.NewSQLCache()
+	// reviewer := db.NewMemStore()
 
 	io.Parse(file, reviewer)
 

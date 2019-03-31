@@ -12,3 +12,4 @@
 *.out
 
 resources/*.csv
+reviews.db
