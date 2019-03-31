@@ -49,3 +49,8 @@ You can see the Open API Specification under **/resources/swagger-step2.yaml** -
 
 
 I would look at the https://golang.org/pkg/net/http/ package for inspiration.
+
+## Notes
+
+Your swagger editor should now be able to make calls into your local machine. Note how we have had to set appropriate headers on each HandleFunc function to cater for this. Is there a better way? 
+
