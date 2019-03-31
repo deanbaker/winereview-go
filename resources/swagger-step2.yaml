@@ -1,0 +1,203 @@
+swagger: "2.0"
+info:
+  description: "Test API to learn GOlang"
+  version: "1.0.0"
+  title: "Wine Review API"
+  contact:
+    email: "dean.baker@digio.com.au"
+host: "localhost:8080"
+tags:
+- name: "wine"
+  description: "DigIO wine reviews"
+schemes:
+- "http"
+paths:
+  /reviews:
+    post:
+      tags:
+      - "wine"
+      summary: Create review
+      produces: 
+      - "application/json"
+      consumes: 
+      - "application/json"
+      parameters: 
+      - in: "body"
+        name: "body"
+        description: "Review to be added"
+        required: true
+        schema:
+          $ref: "#/definitions/CreateReview"
+      responses:
+        201:
+          description: Wine review created
+          schema:
+            $ref: '#/definitions/Review'
+        400:
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/Error'
+
+    get:
+      tags:
+      - "wine"
+      summary: Search reviews
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "Search results returned"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Review'
+  /reviews/{id}:
+    get:
+      tags:
+      - "wine"
+      summary: "Find review by ID"
+      description: "Returns a single wine review"
+      operationId: "getReviewById"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of review to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/Review"
+        404:
+          description: "Review not found"
+    put:
+      tags:
+      - "wine"
+      summary: Update review
+      produces: 
+      - "application/json"
+      consumes: 
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of review to update"
+        required: true
+        type: "integer"
+        format: "int64"
+      - in: "body"
+        name: "body"
+        description: "Review to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/Review"
+
+      responses:
+        200:
+          description: Wine review updated
+          schema:
+            $ref: '#/definitions/Review'
+        400:
+          description: Invalid request
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found
+    delete:
+      tags:
+      - "wine"
+      summary: "Remove review by ID"
+      description: "Removes a single wine review"
+      operationId: "deleteWine"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "ID of review to return"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "Review was deleted"
+        404:
+          description: "Review not found"
+    
+
+definitions:
+  Error: 
+    type: object
+    properties:
+      Code:
+        type: number
+        description: The http response code
+      Message:
+        type: string
+        description: The description of the message
+  
+  Review:
+    type: object
+    properties:
+      id: 
+        type: string
+      title:
+        type: string
+      variety:
+        type: string
+      country:
+        type: string
+      points:
+        type: number
+      taster_name:
+        type: string
+   
+  CreateReview:
+    type: object
+    properties:
+      title:
+        type: string
+      variety:
+        type: string
+      country:
+        type: string
+      points:
+        type: number
+      taster_name:
+        type: string
+      
+        
+  SearchResponse:
+    type: object
+    properties:
+      Content:
+        type: array
+        items:
+          $ref: '#/definitions/Review'
+      First:
+        type: boolean
+        description: true if this is the first page of search results
+      Last:
+        type: boolean
+        description: true if this is the last page of search results
+      TotalPages:
+        type: integer
+        description: the total number of pages available
+      TotalElements:
+        type: integer
+        description: the total count of elements
+      NumberOfElements:
+        type: integer
+        description: the number of elements returned for this page
+      Page:
+        type: integer
+        description: the current page of this resultset
+      
+
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
